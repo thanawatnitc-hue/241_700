@@ -1,0 +1,148 @@
+/* นำเข้าฟอนต์ Kanit จาก Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
+
+/* ตั้งค่าพื้นฐาน */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Kanit', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* พื้นหลังไล่สีสวยๆ */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #333;
+}
+
+/* กล่อง Container หลัก */
+.container {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* เงานุ่มๆ */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* หัวข้อฟอร์ม */
+.header {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #4a4a4a;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+/* จัดการ Layout ของ Input */
+.form-input {
+    margin-bottom: 20px;
+}
+
+.header-form {
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 16px;
+}
+
+/* จัดการ Input Text, Number และ Textarea */
+.form, textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* เอฟเฟกต์ตอนกดช่องกรอกข้อมูล */
+.form:focus, textarea:focus {
+    border-color: #764ba2;
+    box-shadow: 0 0 8px rgba(118, 75, 162, 0.2);
+}
+
+/* การจัดวางแบบ Flex (สำหรับชื่อ นามสกุล อายุ เพศ) */
+.flex {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* ปรับแต่งส่วน Radio และ Checkbox */
+.gender .flex div, 
+.form-input div {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    accent-color: #764ba2; /* เปลี่ยนสีปุ่มเลือกให้เข้าธีม */
+    transform: scale(1.2);
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+/* ปุ่มกด */
+.center {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.button {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-size: 18px;
+    font-family: 'Kanit', sans-serif;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(118, 75, 162, 0.6);
+}
+
+.button:active {
+    transform: translateY(1px);
+}
+
+/* Animation เล็กน้อยตอนโหลด */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ปรับแต่งสำหรับมือถือ */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+    }
+    .flex.form-input {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
