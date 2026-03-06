@@ -1,27 +1,13 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const mysql = require('mysql2/promise');
+const bodyParser = require('body-parser');
 const app = express();
+const port = 8000;
+const cors = require('cors');
+
+app.use(cors());
 
 app.use(bodyParser.json());
-
-const port = 8000;
-
-/*app.get('/testdb', (req, res) => {
-    mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'root',
-        database: 'webdb',
-        port: 8700
-    }).then((conn) => {
-        conn.query('SELECT * FROM users').then((result) => {
-            res.json(result[0]);
-        }).catch((err) => {
-            res.json({error: err.message});
-        });
-    });
-})*/
 
 let conn = null;
 const initMySQL = async () => {
@@ -35,46 +21,44 @@ const initMySQL = async () => {
     console.log('Connected to MySQL database');
 }
 
-//path: = GET /users for get all users from database
 app.get('/users', async (req, res) => {
-    const result = await conn.query('SELECT * FROM users');
-    res.json(result[0])
-});
+    const results = await conn.query('SELECT * FROM users');
+    res.json(results)
+})
 
-//path: = POST /users for add new user
+
 app.post('/users', async (req, res) => {
     try {
         let user = req.body;
-        const results = await conn.query('INSERT INTO users Set ?', user);
+        const results = await conn.query('INSERT INTO users SET ?', user);
+        console.log('results:', results);
         res.json({
-            Message: 'User added successfully',
+            message: 'User added successfully',
             data: results[0]
         });
     } catch (error) {
-        console.log('Error inserting user:', error);
-        res.status(500).json({ Message: 'Error adding user' });
+        console.error('Error inserting user:', error);
+        res.status(500).json({ message: 'Error adding user' });
     }
-});
+})
 
-//path: = GET /users/:id for get user by id
 app.get('/users/:id', async (req, res) => {
     try {
         let id = req.params.id;
         const results = await conn.query('SELECT * FROM users WHERE id = ?', id);
-        if (results[0].length === 0) {
-            throw { statusCode: 404, message: 'User not found' };
+        if(results[0].length == 0){
+            throw{statusCode:404,message:'User not found'};
         }
         res.json(results[0][0]);
     } catch (error) {
-        console.log('Error fetching user:', error);
+        console.error('Error fetching user:', error);
         let statusCode = error.statusCode || 500;
         res.status(statusCode).json({
             message: error.message || 'Error fetching user'
         });
     }
-});
+})
 
-//path: = PUT /users/:id for update user by id
 app.put('/users/:id', async (req, res) => {
     try {
         let id = req.params.id;
@@ -105,7 +89,33 @@ app.delete('/users/:id', async (req, res) => {
     }
 });
 
+app.patch('/user/:id', (req, res) => {
+    let id = req.params.id;
+    let updateUser = req.body;
+
+    //  หา user ที่จาก id ส่งมา
+    let selectedIndex = users.findIndex(user => user.id == id);
+
+    // อัพเดตข้อมูล users
+    users[selectedIndex].firstname = updateUser.firstname || users[selectedIndex].firstname;
+    users[selectedIndex].lastname = updateUser.lastname || users[selectedIndex].lastname;
+
+    if (updateUser.firstname) {
+        users[selectedIndex].firstname = updateUser.firstname;
+    }
+    if (updateUser.lastname) {
+        users[selectedIndex].lastname = updateUser.lastname;
+    }
+
+    res.json({
+        message: 'User update successful',
+        data: {
+            user: updateUser,
+            indexUpdate: selectedIndex
+        }
+    });
+});
 app.listen(port, async () => {
     await initMySQL();
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Server running on http://localhost:${port}`);
 });
