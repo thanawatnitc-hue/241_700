@@ -1,148 +1,203 @@
-/* นำเข้าฟอนต์ Kanit จาก Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
+/* นำเข้าฟอนต์ Kanit */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700;800&display=swap');
 
-/* ตั้งค่าพื้นฐาน */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* พื้นหลังสีดำ-เทาเข้มๆ แบบเว็บสล็อต */
 body {
     font-family: 'Kanit', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* พื้นหลังไล่สีสวยๆ */
+    background: #0a0a0a;
+    background-image: radial-gradient(circle at 50% 0%, #3a0000 0%, #000000 70%); /* แสงสีแดงสลัวๆ ตรงกลาง */
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* เผื่อใส่แถบประกาศด้านบน */
     align-items: center;
     padding: 20px;
-    color: #333;
+    color: #ffffff;
 }
 
-/* กล่อง Container หลัก */
-.container {
-    background-color: #ffffff;
+/* 🚨 แถบประกาศเลื่อนๆ (ใส่ <div class="marquee-container"> แจ้งเตือนถอนเงิน... </div>) */
+.marquee-container {
     width: 100%;
     max-width: 500px;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* เงานุ่มๆ */
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-/* หัวข้อฟอร์ม */
-.header {
-    font-size: 28px;
+    background: linear-gradient(90deg, #ff0000, #800000);
+    color: #ffff00;
+    font-size: 16px;
     font-weight: 600;
-    text-align: center;
-    margin-bottom: 30px;
-    color: #4a4a4a;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 10px;
+    padding: 8px 15px;
+    border: 1px solid #ffcc00;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }
 
-/* จัดการ Layout ของ Input */
+.marquee-content {
+    display: inline-block;
+    animation: scrollText 10s linear infinite;
+}
+
+@keyframes scrollText {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* กล่องฟอร์มหลัก ดำขลับ ตัดขอบทองวิบวับ */
+.container {
+    background: #111111;
+    width: 100%;
+    max-width: 500px;
+    padding: 30px 20px;
+    border: 2px solid #ffcc00; /* ขอบทอง */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.4), inset 0 0 20px rgba(0, 0, 0, 0.9);
+    position: relative;
+}
+
+/* ป้าย โบนัส 100% แปะมุมกล่อง */
+.container::after {
+    content: '🔥 โบนัส 100%';
+    position: absolute;
+    top: -15px;
+    right: -10px;
+    background: #ff0000;
+    color: #ffff00;
+    padding: 5px 15px;
+    font-weight: 800;
+    font-size: 14px;
+    border: 2px solid #ffff00;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #ff0000;
+    animation: blinkBadge 0.5s infinite alternate;
+    transform: rotate(10deg);
+}
+
+@keyframes blinkBadge {
+    0% { transform: scale(1) rotate(10deg); box-shadow: 0 0 5px #ff0000; }
+    100% { transform: scale(1.1) rotate(10deg); box-shadow: 0 0 20px #ff0000, 0 0 10px #ffff00; }
+}
+
+/* หัวข้อ สมัครสมาชิก สีทองสว่างๆ */
+.header {
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #ffcc00; /* สีทองเว็บพนัน */
+    text-shadow: 0px 2px 4px rgba(0,0,0,1), 0 0 10px rgba(255, 204, 0, 0.8);
+    background: -webkit-linear-gradient(#fff, #ffcc00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-bottom: 2px solid #333;
+    padding-bottom: 15px;
+}
+
 .form-input {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .header-form {
     font-weight: 500;
-    margin-bottom: 8px;
-    color: #555;
-    font-size: 16px;
+    margin-bottom: 5px;
+    color: #cccccc;
+    font-size: 15px;
 }
 
-/* จัดการ Input Text, Number และ Textarea */
+/* ช่องกรอกข้อมูล สีดำ ขอบเทา */
 .form, textarea {
     width: 100%;
     padding: 12px 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
+    background: #000000;
+    border: 1px solid #444444;
+    border-radius: 5px;
+    color: #ffcc00; /* พิมพ์แล้วเป็นสีทอง */
     font-family: 'Kanit', sans-serif;
     font-size: 16px;
-    transition: all 0.3s ease;
+    transition: all 0.3s;
     outline: none;
 }
 
-textarea {
-    resize: vertical;
-    min-height: 80px;
-}
-
-/* เอฟเฟกต์ตอนกดช่องกรอกข้อมูล */
+/* ตอนกดพิมพ์ ขอบจะเรืองแสงสีเขียว/ทอง */
 .form:focus, textarea:focus {
-    border-color: #764ba2;
-    box-shadow: 0 0 8px rgba(118, 75, 162, 0.2);
+    border-color: #00ff00; /* สีเขียวนีออน */
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    background: #1a1a1a;
 }
 
-/* การจัดวางแบบ Flex (สำหรับชื่อ นามสกุล อายุ เพศ) */
+/* ปรับ Flex และ Radio */
 .flex {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     align-items: center;
     flex-wrap: wrap;
 }
 
-/* ปรับแต่งส่วน Radio และ Checkbox */
 .gender .flex div, 
 .form-input div {
     display: flex;
     align-items: center;
-    margin-right: 15px;
-    margin-top: 5px;
+    color: #ffffff;
     cursor: pointer;
 }
 
 input[type="radio"], input[type="checkbox"] {
-    accent-color: #764ba2; /* เปลี่ยนสีปุ่มเลือกให้เข้าธีม */
-    transform: scale(1.2);
+    accent-color: #00ff00;
+    transform: scale(1.3);
     margin-right: 8px;
     cursor: pointer;
 }
 
-/* ปุ่มกด */
+/* 🟢 ปุ่มกดยืนยัน (สีเขียวแบบ Line กระพริบดึงดูดสายตา) */
 .center {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 25px;
 }
 
 .button {
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    padding: 12px 40px;
-    font-size: 18px;
+    width: 100%;
+    background: linear-gradient(180deg, #00ff00 0%, #008800 100%);
+    color: #ffffff;
+    border: 2px solid #00ff00;
+    padding: 15px 0;
+    font-size: 24px;
+    font-weight: 800;
     font-family: 'Kanit', sans-serif;
-    border-radius: 50px;
+    border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
-    transition: transform 0.2s, box-shadow 0.2s;
+    text-shadow: 1px 1px 2px #000000;
+    box-shadow: 0 5px 15px rgba(0, 255, 0, 0.4);
+    animation: pulseButton 1s infinite alternate;
 }
 
 .button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(118, 75, 162, 0.6);
+    background: linear-gradient(180deg, #33ff33 0%, #00aa00 100%);
 }
 
 .button:active {
-    transform: translateY(1px);
+    transform: scale(0.98);
 }
 
-/* Animation เล็กน้อยตอนโหลด */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes pulseButton {
+    0% { box-shadow: 0 0 10px #008800; transform: scale(1); }
+    100% { box-shadow: 0 0 25px #00ff00, 0 0 15px #00ff00 inset; transform: scale(1.02); }
 }
 
-/* ปรับแต่งสำหรับมือถือ */
-@media (max-width: 480px) {
-    .container {
-        padding: 20px;
-    }
-    .flex.form-input {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+/* ข้อความด้านล่างปุ่ม (เช่น มีปัญหาติดต่อแอดมิน) */
+.message {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #aaaaaa;
+}
+.message span {
+    color: #00ff00;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
 }
