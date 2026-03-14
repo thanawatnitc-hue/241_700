@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -11,6 +10,7 @@
 </head>
 <body>
     <div class="container">
+        <a href="user.html">Go to user management</a>
         <div class="header">
             Register form
         </div>
@@ -23,11 +23,11 @@
             <input class="form" name="lastname" type="text">
         </div>
         <div class="flex form-input">
-            <div class="header-form">อายุ</div> 
+            <div class="header-form">อายุ</div>
             <input class="form" name="age" type="number" min="0" max="100">
         </div>
         <div class="flex gender form-input">
-            <div class="header-form">เพศ</div> 
+            <div class="header-form">เพศ</div>
             <div class="flex">
                 <div>
                     <input name="gender" type="radio" value="ชาย"> ชาย
@@ -43,7 +43,7 @@
         <div class="form-input">
             งานอดิเรก
             <div>
-                <input name="interests" type="checkbox" value="อ่านหนังสือ"> อ่านหนังสือ 
+                <input name="interests" type="checkbox" value="อ่านหนังสือ"> อ่านหนังสือ
             </div>
             <div>
                 <input name="interests" type="checkbox" value="ดูหนัง"> ดูหนัง
@@ -52,12 +52,12 @@
                 <input name="interests" type="checkbox" value="ฟังเพลง"> ฟังเพลง
             </div>
         </div>
-        <div class="form-input" >
+        <div class="form-input">
             คำอธิบาย
             <textarea name="description"></textarea>
         </div>
         <div class="message" id="message">
-                กรุณากรอกข้อมูลให้ครบถ้วนก่อนกดส่งข้อมูล
+           hi
         </div>
         <div class="center">
             <button onclick="submitData()" class="button">ส่งข้อมูล</button>
